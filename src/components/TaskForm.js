@@ -1,23 +1,23 @@
-import { useRef } from "react";
+import { useState } from "react";
 
 function TaskForm( { addTaskHandler } ) {
-    const nameRef = useRef(null);
-    const dateRef = useRef(null);
+    const [name, setName] = useState("");
+     const [date, setDate] = useState("");
 
     const submitHandler = (e) => {
         e.preventDefault();
 
         const newTask = {
             id: Date.now(),
-            name: nameRef.current.value,
-            due: dateRef.current.value,
+            name,
+            due: date,
             status: "inactive"
         }
 
         addTaskHandler(newTask);
 
-        nameRef.current.value = "";
-        dateRef.current.value = "";
+        setName("");
+        setDate("");
     }
 
     return (
@@ -29,16 +29,18 @@ function TaskForm( { addTaskHandler } ) {
                         id="name" 
                         type="text" 
                         placeholder="enter task name"
-                        ref={nameRef}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                     />
                     <label></label>
                     <input 
                         id="due" 
                         type="date"
-                        ref={dateRef}
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
                     />
                 </fieldset>
-                <button type="submit">add task</button>
+                <button type="submit" disabled={!name}>add task</button>
             </form>
         </div>
     );
