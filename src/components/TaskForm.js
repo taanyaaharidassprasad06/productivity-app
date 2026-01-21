@@ -1,8 +1,10 @@
 import { useState } from "react";
+import CategorySelection from "./CategorySelection";
 
 function TaskForm( { addTaskHandler } ) {
     const [name, setName] = useState("");
-     const [date, setDate] = useState("");
+    const [date, setDate] = useState("");
+    const [category, setCategory] = useState("");
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -11,6 +13,7 @@ function TaskForm( { addTaskHandler } ) {
             id: Date.now(),
             name,
             due: date,
+            category,
             status: "inactive"
         }
 
@@ -18,6 +21,7 @@ function TaskForm( { addTaskHandler } ) {
 
         setName("");
         setDate("");
+        setCategory("");
     }
 
     return (
@@ -32,13 +36,14 @@ function TaskForm( { addTaskHandler } ) {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
-                    <label></label>
+                    <label>Due Date: </label>
                     <input 
                         id="due" 
                         type="date"
                         value={date}
                         onChange={(e) => setDate(e.target.value)}
                     />
+                    <CategorySelection selectedCategory={category} onSelectChange={setCategory}/>
                 </fieldset>
                 <button type="submit" disabled={!name}>add task</button>
             </form>
