@@ -1,11 +1,14 @@
 import './App.css';
 import TaskList from './components/TaskList';
+import { CategoryProvider } from './components/CategoryContext';
 
 function App() {
   return (
-    <div>
-      <TaskList />
-    </div>
+    <CategoryProvider>
+      <div>
+        <TaskList />
+      </div>
+    </CategoryProvider>
   );
 }
 
