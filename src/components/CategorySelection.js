@@ -1,25 +1,26 @@
 import { useState } from "react";
+import { useCategories } from "./CategoryContext";
 
 function CategorySelection( { selectedCategory, onSelectChange } ) {
-    const [filters, setFilters] = useState([]);
+    const { categories, setCategories } = useCategories();
     const [isManaging, setIsManaging] = useState(false);
     const [input, setInput] = useState("");
 
     const addFilter = () => {
         const newFilter = input.trim();
         if(newFilter) {
-            setFilters([...filters, newFilter]);
+            setCategories([...categories, newFilter]);
             setInput("");
         }
     }
 
     const deleteFilter = (index) => {
-        const remainingFilters = [
-            ...filters.slice(0, index),
-            ...filters.slice(index + 1)
+        const remainingcategories = [
+            ...categories.slice(0, index),
+            ...categories.slice(index + 1)
         ];
 
-        setFilters(remainingFilters);
+        setCategories(remainingcategories);
     }
 
     return (
@@ -31,7 +32,7 @@ function CategorySelection( { selectedCategory, onSelectChange } ) {
                     onChange={(e) => onSelectChange(e.target.value)}
                 >
                     <option value="" disabled>Select Filter</option>
-                    {filters.map((filter, index) => (
+                    {categories.map((filter, index) => (
                         <option key={index} value={filter}>{filter}</option>
                     ))}
                 </select>
@@ -49,7 +50,7 @@ function CategorySelection( { selectedCategory, onSelectChange } ) {
                     <button type="button" onClick={addFilter}>Add</button>
                 </div>
                 <div>
-                    {filters.map((filter, index) => (
+                    {categories.map((filter, index) => (
                         <div key={index}>
                             <span>{filter}</span>
                             <button type="button" onClick={() => deleteFilter(index)}>X</button>
