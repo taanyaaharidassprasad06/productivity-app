@@ -1,8 +1,8 @@
 import { useState } from "react";
 import CategorySelection from "./CategorySelection";
 
-function TaskForm( { addTaskHandler } ) {
-    const [name, setName] = useState("");
+function TaskForm( { taskName, addTaskHandler } ) {
+    const [name, setName] = useState(taskName);
     const [date, setDate] = useState("");
     const [category, setCategory] = useState("");
 
@@ -45,7 +45,7 @@ function TaskForm( { addTaskHandler } ) {
                     />
                     <CategorySelection selectedCategory={category} onSelectChange={setCategory}/>
                 </fieldset>
-                <button type="submit" disabled={!name}>add task</button>
+                <button type="submit" disabled={!name}>Add</button>
             </form>
         </div>
     );

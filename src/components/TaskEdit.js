@@ -32,7 +32,7 @@ function TaskEdit( { task, onSave } ) {
                     />
                     <CategorySelection selectedCategory={category} onSelectChange={setCategory}/>
 
-                    <button onClick={handleSave}>Save Changes</button>
+                    <button type="submit" onClick={handleSave}>Done</button>
                 </fieldset>
             </form>
         </div>

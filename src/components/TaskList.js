@@ -1,6 +1,7 @@
 import { useState } from "react";
 import TaskForm from "./TaskForm";
 import Task from "./Task";
+import AddModal from "./AddModal";
 
 function TaskList() {
     const [todos, setTodos] = useState([]);
@@ -18,7 +19,8 @@ function TaskList() {
 
     return (
         <div>
-            <TaskForm addTaskHandler={addTask}/>
+            <AddModal addTaskHandler={addTask}/>
+            {/*<TaskForm addTaskHandler={addTask}/>*/}
 
             {todos.map(todo => (
                 <Task key={todo.id} task={todo} onTaskUpdate={updateTask}/>
