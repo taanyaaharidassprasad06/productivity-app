@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useTasks } from "./TaskContext";
 import TaskForm from "./TaskForm";
 
-function AddModal( { addTaskHandler } ) {
+function AddModal() {
+    const { add } = useTasks();
     const [open, setOpen] = useState(false);
     const [title, setTitle] = useState("");
 
@@ -9,7 +11,7 @@ function AddModal( { addTaskHandler } ) {
         <div>
             {open ? (
                 <TaskForm taskName={title} addTaskHandler={(newTask) => {
-                    addTaskHandler(newTask); 
+                    add(newTask); 
                     setOpen(false);
                     setTitle("");
                 }}/>
