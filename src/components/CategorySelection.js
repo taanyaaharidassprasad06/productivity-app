@@ -5,12 +5,14 @@ function CategorySelection( { selectedCategory, onSelectChange } ) {
     const { categories, setCategories } = useCategories();
     const [isManaging, setIsManaging] = useState(false);
     const [input, setInput] = useState("");
+    const [colorInput, setColorInput] = useState("#ffffff");
 
     const addFilter = () => {
         const newFilter = input.trim();
         if(newFilter) {
-            setCategories([...categories, newFilter]);
+            setCategories([...categories, {name: newFilter, color: colorInput}]);
             setInput("");
+            setColorInput("#ffffff");
         }
     }
 
@@ -32,8 +34,8 @@ function CategorySelection( { selectedCategory, onSelectChange } ) {
                     onChange={(e) => onSelectChange(e.target.value)}
                 >
                     <option value="" disabled>Select Filter</option>
-                    {categories.map((filter, index) => (
-                        <option key={index} value={filter}>{filter}</option>
+                    {categories.map((category, index) => (
+                        <option key={index} value={category.name}>{category.name}</option>
                     ))}
                 </select>
                 <button type="button" onClick={() => setIsManaging(true)}>Manage Categories</button>
@@ -47,12 +49,17 @@ function CategorySelection( { selectedCategory, onSelectChange } ) {
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                     />
+                    <input 
+                        type="color"
+                        value={colorInput}
+                        onChange={(e) => setColorInput(e.target.value)}
+                    />
                     <button type="button" onClick={addFilter}>Add</button>
                 </div>
                 <div>
-                    {categories.map((filter, index) => (
+                    {categories.map((category, index) => (
                         <div key={index}>
-                            <span>{filter}</span>
+                            <span>{category.name}</span>
                             <button type="button" onClick={() => deleteFilter(index)}>X</button>
                         </div>
                     ))}

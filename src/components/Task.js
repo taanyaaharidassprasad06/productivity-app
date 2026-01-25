@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { useTasks } from "./TaskContext";
+import { useCategories } from "./CategoryContext";
 import TaskEdit from "./TaskEdit";
 
 function Task( { task } ) {
     const { edit } = useTasks();
+    const { categories } = useCategories();
     const [isEditing, setIsEditing] = useState(false);
+
+    const categoryObj = categories.find(category => category.name === task.category);
+    const bgColor = categoryObj ? categoryObj.color : "#ffffff";
 
     const handleSave = (updates) => {
         edit(task.id, updates);
@@ -19,7 +24,7 @@ function Task( { task } ) {
                     onSave={handleSave} 
                 />
             ) : (
-                <div>
+                <div style={{backgroundColor: bgColor}}>
                     <p>{task.name}</p>
                     <p>{task.due}</p>
                     <p>{task.category}</p>

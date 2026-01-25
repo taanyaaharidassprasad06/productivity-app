@@ -29,7 +29,7 @@ function TaskList() {
                 <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
                     <option value="">All</option>
                     {categories.map((category, index) => (
-                        <option key={index} value={category}>{category}</option>
+                        <option key={index} value={category.name}>{category.name}</option>
                     ))}
                 </select>
 
