@@ -1,15 +1,55 @@
 import { useTasks } from "./TaskContext";
+import { useCategories } from "./CategoryContext";
+import { useState } from "react";
 import Task from "./Task";
 import AddModal from "./AddModal";
 
 function TaskList() {
     const { todos } = useTasks();
+    const { categories } = useCategories();
+
+    const [categoryFilter, setCategoryFilter] = useState("");
+    const [statusFilter, setStatusFilter] = useState("");
+    const [sortOrder, setSortOrder] = useState("");
+
+    const filteredTodos = todos
+        .filter((todo) => !categoryFilter || categoryFilter === todo.category)
+        .filter((todo) => !statusFilter || statusFilter === todo.status)
+        .sort((a, b) => {
+            if(!sortOrder) return 0;
+            const dateA = new Date(a.due);
+            const dateB = new Date(b.due);
+            return sortOrder === "nearest" ? dateA - dateB : dateB - dateA;
+
+        })
 
     return (
         <div>
+            <div>
+                <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
+                    <option value="">All</option>
+                    {categories.map((category, index) => (
+                        <option key={index} value={category}>{category}</option>
+                    ))}
+                </select>
+
+                <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+                    <option value="">All</option>
+                    <option value="inactive">Not Started</option>
+                    <option value="active">In Progress</option>
+                    <option value="complete">Completed</option>
+                </select>
+
+                <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
+                    <option value="">All</option>
+                    <option value="nearest">Nearest</option>
+                    <option value="farthest">Farthest</option>
+                </select>
+            </div>
+
             <AddModal/>
 
-            {todos.map(todo => (
+            {filteredTodos.map(todo => (
                 <Task key={todo.id} task={todo}/>
             ))}
         </div>
