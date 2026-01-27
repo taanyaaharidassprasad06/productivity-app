@@ -1,10 +1,14 @@
+import '../App.css';
 import { useState } from "react";
 import CategorySelection from "./CategorySelection";
+import { useTasks } from "./TaskContext";
 
-function TaskForm( { taskName, addTaskHandler } ) {
-    const [name, setName] = useState(taskName);
+function TaskForm( { /*taskName, addTaskHandler*/ } ) {
+    const [name, setName] = useState(/*taskName*/ "");
     const [date, setDate] = useState("");
     const [category, setCategory] = useState("");
+    // new line:
+    const { add } = useTasks();
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -17,7 +21,8 @@ function TaskForm( { taskName, addTaskHandler } ) {
             status: "inactive"
         }
 
-        addTaskHandler(newTask);
+        /*addTaskHandler(newTask);*/
+        add(newTask);
 
         setName("");
         setDate("");

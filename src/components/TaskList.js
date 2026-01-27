@@ -1,8 +1,10 @@
+import '../App.css';
 import { useTasks } from "./TaskContext";
 import { useCategories } from "./CategoryContext";
 import { useState } from "react";
 import Task from "./Task";
 import AddModal from "./AddModal";
+import TaskForm from "./TaskForm";
 
 function TaskList() {
     const { todos } = useTasks();
@@ -47,7 +49,8 @@ function TaskList() {
                 </select>
             </div>
 
-            <AddModal/>
+            {/*<AddModal/>*/}
+            <TaskForm />
 
             {filteredTodos.map(todo => (
                 <Task key={todo.id} task={todo}/>
