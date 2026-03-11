@@ -5,13 +5,16 @@ import { TaskProvider } from './components/TaskContext';
 
 function App() {
   return (
-    <CategoryProvider>
-      <TaskProvider>
-        <div>
-          <TaskList />
-        </div>
-      </TaskProvider>
-    </CategoryProvider>
+    <div className="base-container">
+      <CategoryProvider>
+        <TaskProvider>
+          <div>
+            <TaskList />
+          </div>
+        </TaskProvider>
+      </CategoryProvider>
+    </div>
+    
   );
 }
 

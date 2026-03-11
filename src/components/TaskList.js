@@ -26,7 +26,7 @@ function TaskList() {
         })
 
     return (
-        <div>
+        <div className="task-container">
             <div>
                 <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
                     <option value="">All</option>

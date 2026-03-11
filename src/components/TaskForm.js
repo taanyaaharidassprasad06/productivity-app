@@ -30,8 +30,8 @@ function TaskForm( { /*taskName, addTaskHandler*/ } ) {
     }
 
     return (
-        <div>
-            <form onSubmit={submitHandler}>
+        <div className="form-container">
+            <form className="add-todo" onSubmit={submitHandler}>
                 <fieldset>
                     <label htmlFor="name">ToDo: </label>
                     <input 
