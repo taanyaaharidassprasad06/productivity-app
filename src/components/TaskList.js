@@ -7,6 +7,7 @@ import AddModal from "./AddModal";
 import TaskForm from "./TaskForm";
 
 function TaskList() {
+    // Get tasks and categories from context
     const { todos } = useTasks();
     const { categories } = useCategories();
 
@@ -26,7 +27,7 @@ function TaskList() {
         })
 
     return (
-        <div className="task-container">
+        <div>
             <div>
                 <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
                     <option value="">All</option>

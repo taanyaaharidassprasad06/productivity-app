@@ -7,6 +7,7 @@ function TaskEdit( { task, onSave } ) {
     const [date, setDate] = useState(task.due);
     const [category, setCategory] = useState(task.category);
 
+    // User clicks "Done" button in TaskEdit --> collect updated values --> pass them back to Task --> Task updates task in TaskContext
     const handleSave = () => {
         const updates = { name, due: date, category };
         onSave(updates);
