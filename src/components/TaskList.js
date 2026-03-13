@@ -3,7 +3,6 @@ import { useTasks } from "./TaskContext";
 import { useCategories } from "./CategoryContext";
 import { useState } from "react";
 import Task from "./Task";
-import AddModal from "./AddModal";
 import TaskForm from "./TaskForm";
 
 function TaskList() {
@@ -28,30 +27,29 @@ function TaskList() {
 
     return (
         <div>
-            <div>
-                <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
+            <TaskForm />
+
+            <div className="filter-by">
+                <select className="filter-by-val" value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
                     <option value="">All</option>
                     {categories.map((category, index) => (
                         <option key={index} value={category.name}>{category.name}</option>
                     ))}
                 </select>
 
-                <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+                <select className="filter-by-val" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
                     <option value="">All</option>
                     <option value="inactive">Not Started</option>
                     <option value="active">In Progress</option>
                     <option value="complete">Completed</option>
                 </select>
 
-                <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
+                <select className="filter-by-val" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
                     <option value="">All</option>
                     <option value="nearest">Nearest</option>
                     <option value="farthest">Farthest</option>
                 </select>
             </div>
-
-            {/*<AddModal/>*/}
-            <TaskForm />
 
             {filteredTodos.map(todo => (
                 <Task key={todo.id} task={todo}/>

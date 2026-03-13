@@ -3,11 +3,10 @@ import { useState } from "react";
 import CategorySelection from "./CategorySelection";
 import { useTasks } from "./TaskContext";
 
-function TaskForm( { /*taskName, addTaskHandler*/ } ) {
-    const [name, setName] = useState(/*taskName*/ "");
+function TaskForm() {
+    const [name, setName] = useState("");
     const [date, setDate] = useState("");
     const [category, setCategory] = useState("");
-    // new line:
     const { add } = useTasks();
 
     const submitHandler = (e) => {
@@ -21,7 +20,6 @@ function TaskForm( { /*taskName, addTaskHandler*/ } ) {
             status: "inactive"
         }
 
-        /*addTaskHandler(newTask);*/
         add(newTask);
 
         setName("");
@@ -30,27 +28,31 @@ function TaskForm( { /*taskName, addTaskHandler*/ } ) {
     }
 
     return (
-        <div className="form-container">
-            <form className="add-todo" onSubmit={submitHandler}>
-                <fieldset>
-                    <label htmlFor="name">ToDo: </label>
-                    <input 
-                        id="name" 
-                        type="text" 
-                        placeholder="enter task name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                    <label>Due Date: </label>
-                    <input 
-                        id="due" 
-                        type="date"
-                        value={date}
-                        onChange={(e) => setDate(e.target.value)}
-                    />
+        <div>
+            <form onSubmit={submitHandler}>
+                <fieldset className="todo-form">
+                    <div>
+                        <label className="label-name" htmlFor="name">ToDo: </label>
+                        <input className="input-field"
+                            id="name" 
+                            type="text" 
+                            placeholder="enter task name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label className="label-name" htmlFor="due">Due Date: </label>
+                        <input className="input-field"
+                            id="due" 
+                            type="date"
+                            value={date}
+                            onChange={(e) => setDate(e.target.value)}
+                        />
+                    </div>
                     <CategorySelection selectedCategory={category} onSelectChange={setCategory}/>
+                    <button className="action-btn" type="submit" disabled={!name}>✚</button>
                 </fieldset>
-                <button type="submit" disabled={!name}>Add</button>
             </form>
         </div>
     );

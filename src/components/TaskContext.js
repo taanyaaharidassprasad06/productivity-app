@@ -16,8 +16,13 @@ export function TaskProvider( { children} ) {
         )));
     }
 
+    const deleteTodo = (id) => {
+        const newTodos = todos.filter(todo => todo.id !== id);
+        setTodos(newTodos);
+    }
+
     return (
-        <TaskContext.Provider value={{ todos, add, edit }}>
+        <TaskContext.Provider value={{ todos, add, edit, deleteTodo }}>
             {children}
         </TaskContext.Provider>
     );
