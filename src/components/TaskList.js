@@ -26,7 +26,7 @@ function TaskList() {
         })
 
     return (
-        <div>
+        <div className="task-list">
             <TaskForm />
 
             <div className="filter-by">

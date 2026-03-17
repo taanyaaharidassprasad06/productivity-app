@@ -14,6 +14,17 @@ fieldset {
     flex-direction: row;
 }
 
-.sidebar {
-    position: fixed;
+.sidebar-settings {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-btn {
+    width: 20px;
+    height: 20px;
+}
+
+.task-list {
+    flex: 1;
+    background-color: aliceblue;
 }

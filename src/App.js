@@ -12,8 +12,10 @@ function App() {
       <CategoryProvider>
         <TaskProvider>
           <div className="main-section">
-            <button onClick={() => setSidebarOpen(!sidebar)}>#</button>
-            {sidebar && <Sidebar/>}
+            <div className="sidebar-settings">
+              <button className="sidebar-btn" onClick={() => setSidebarOpen(!sidebar)}>#</button>
+              {sidebar && <Sidebar/>}
+            </div>
             <TaskList />
           </div>
         </TaskProvider>
