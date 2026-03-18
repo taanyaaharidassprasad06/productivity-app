@@ -24,7 +24,17 @@ fieldset {
     height: 20px;
 }
 
+.sidebar {
+    width: 300px;
+    background-color: rgb(255, 236, 248);
+}
+
 .task-list {
     flex: 1;
     background-color: aliceblue;
+}
+
+.category-settings {
+    display: flex;
+    flex-direction: row;
 }
