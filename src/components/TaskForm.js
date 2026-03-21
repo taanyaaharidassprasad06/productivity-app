@@ -1,13 +1,14 @@
 import '../App.css';
 import { useState } from "react";
-import CategorySelection from "./CategorySelection";
 import { useTasks } from "./TaskContext";
+import { useCategories } from "./CategoryContext";
 
 function TaskForm() {
     const [name, setName] = useState("");
     const [date, setDate] = useState("");
     const [category, setCategory] = useState("");
     const { add } = useTasks();
+    const { categories } = useCategories();
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -50,7 +51,15 @@ function TaskForm() {
                             onChange={(e) => setDate(e.target.value)}
                         />
                     </div>
-                    <CategorySelection selectedCategory={category} onSelectChange={setCategory}/>
+                    <select 
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                    >
+                        <option value="none"> </option>
+                        {categories.map((category, index) => (
+                            <option key={index} value={category.name}>{category.name}</option>
+                        ))}
+                    </select>
                     <button className="action-btn" type="submit" disabled={!name}>✚</button>
                 </fieldset>
             </form>
