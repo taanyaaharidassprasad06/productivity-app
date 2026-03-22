@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useCategories } from "./CategoryContext";
 
-function ListModal( { editIndex, onClose } ) {
+function ListModal( { onClose } ) {
     const [name, setName] = useState("");
     const [color, setColor] = useState("#ffffff");
+    const [editIndex, setEditIndex] = useState(null);
     const { categories, setCategories } = useCategories();
 
     const addCategory = () => {
@@ -13,6 +14,12 @@ function ListModal( { editIndex, onClose } ) {
             setName("");
             setColor("#ffffff");
         }
+    }
+
+    const startEdit = (index) => {
+        setEditIndex(index);
+        setName(categories[index].name);
+        setColor(categories[index].color);
     }
 
     const editCategory = () => {
@@ -25,31 +32,40 @@ function ListModal( { editIndex, onClose } ) {
         setColor("#ffffff");
     }
 
-    // when editIndex changes (when user clicks edit button) populate modal with category's current name and color
-    // useEffect runs when dependency array values change so here it runs when editIndex changes to pre-fill inputs
-    // if dependency array is empty, it only runs once when component mounts (first time a component is rendered)
-    useEffect(() => {
-        if(editIndex !== null) {
-            setName(categories[editIndex].name);
-            setColor(categories[editIndex].color);
-        }
-    }, [editIndex, categories])
+    const deleteCategory = (index) => {
+        const remainingCategories = [
+            ...categories.slice(0, index),
+            ...categories.slice(index + 1)
+        ];
+        setCategories(remainingCategories);
+    }
 
     return (
-        <div>
-            <input 
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            />
-            <input className="color-selection"
-                type="color"
-                value={color}
-                onChange={(e) => setColor(e.target.value)}
-            />
-            <button onClick={() => {addCategory(); onClose();}}>+ List</button>
-            {editIndex !== null && <button onClick={() => {editCategory(); onClose();}}>Save</button>}
+        <div className="modal-overlay">
+            <div className="list-modal">
+                <input 
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                />
+                <input className="color-selection"
+                    type="color"
+                    value={color}
+                    onChange={(e) => setColor(e.target.value)}
+                />
+                <button onClick={() => addCategory()}>+ List</button>
+                {categories.map((category, index) => (
+                    <div className="category-settings" style={{backgroundColor: category.color}}>
+                        <div key={index}>{category.name}</div>
+                        <button onClick={() => startEdit(index)}>✎</button>
+                        <button onClick={() => deleteCategory(index)}>❌</button>
+                    </div> 
+                ))}
+                {editIndex !== null && <button onClick={() => editCategory()}>Save</button>}
+                <button onClick={() => onClose()}>Close</button>
+            </div>
         </div>
+        
     );
     
 }

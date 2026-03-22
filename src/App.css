@@ -17,6 +17,9 @@ fieldset {
 .sidebar-settings {
     display: flex;
     flex-direction: column;
+    border: solid gray 1px;
+    height: 100vh;
+    
 }
 
 .sidebar-btn {
@@ -26,15 +29,65 @@ fieldset {
 
 .sidebar {
     width: 300px;
-    background-color: rgb(255, 236, 248);
+    padding: 15px;
+    background-color: white;
 }
 
 .task-list {
     flex: 1;
-    background-color: aliceblue;
+    padding: 30px;
+    background-color: rgb(245, 245, 245);
 }
 
 .category-settings {
+    display: flex;
+    flex-direction: row;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0; /* start at top of screen */
+    left: 0; /* start at left of screen */
+    width: 100vw; 
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* rgba - a: makes background transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.list-modal {
+    padding: 50px;
+    border-radius: 15px;
+   background-color: white;
+}
+
+.task {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+.task-info {
+    display: flex;
+    flex: row;
+    gap: 15px;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.action-btn {
+    margin-right: 20px;
+    background-color: transparent;
+    border: none;
+}
+
+.todo-form {
     display: flex;
     flex-direction: row;
 }

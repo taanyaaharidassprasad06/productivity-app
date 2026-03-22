@@ -4,29 +4,21 @@ import { useCategories } from "./CategoryContext";
 
 function Sidebar() {
     const [isListModalOpen, setIsListModalOpen] = useState(false);
-    const [editingIndex, setEditingIndex] = useState(null);
-    const { categories, setCategories } = useCategories()
-
-    const deleteCategory = (index) => {
-        const remainingCategories = [
-            ...categories.slice(0, index),
-            ...categories.slice(index + 1)
-        ];
-        setCategories(remainingCategories);
-    }
+    const { categories } = useCategories()
 
     return (
         <div className="sidebar">
             <h4>Navigation</h4>
-            <button onClick={() => {setIsListModalOpen(!isListModalOpen); setEditingIndex(null)}}>+ New List</button>
+            <div>
+                <h6>My Lists</h6>
+                <button onClick={() => {setIsListModalOpen(!isListModalOpen)}}>⛭</button>
+            </div>
 
-            {isListModalOpen && <ListModal editIndex={editingIndex} onClose={() => setIsListModalOpen(false)}/>}
+            {isListModalOpen && <ListModal onClose={() => setIsListModalOpen(false)}/>}
 
             {categories.map((category, index) => (
-                <div className="category-settings">
+                <div className="category-settings" style={{backgroundColor: category.color}}>
                     <div key={index}>{category.name}</div>
-                    <button onClick={() => {setIsListModalOpen(true); setEditingIndex(index)}}>Edit</button>
-                    <button onClick={() => deleteCategory(index)}>Delete</button>
                 </div> 
             ))}
 

@@ -12,9 +12,14 @@ function Task( { task } ) {
     const [category, setCategory] = useState(task.category);*/
     const [isEditing, setIsEditing] = useState(false);
     const statusLabels = {
-        inactive: "Not Started",
-        active: "In Progress",
-        complete: "Completed"
+        inactive: "NOT STARTED",
+        active: "IN PROGRESS",
+        complete: "COMPLETED"
+    };
+    const statusColors = {
+        inactive: "#f3b4b3",
+        active: "#f2e8ac",
+        complete: "#d0efbc"
     };
 
     // returns category object that matches task's category name or undefined if not found
@@ -42,19 +47,14 @@ function Task( { task } ) {
                 <EditModal taskItem={task} onSave={handleSave}/>
             ) : (
                 <div className="task" style={{backgroundColor: bgColor}}>
-                    <p>{task.name}</p>
-                    <p>{task.category}</p>
-                    <p onClick={cycleStatus}>{statusLabels[task.status]}</p>
-                   {/* <select className="status-select"
-                        value={task.status}
-                        onChange={(e) => edit(task.id, { status: e.target.value })}
-                    >
-                        <option value="inactive">Not Started</option>
-                        <option value="active">In Progress</option>
-                        <option value="complete">Completed</option>
-                    </select> */}
-                    <p>{task.due}</p>
-                    <div className="task-action-btns" style={{backgroundColor: bgColor}}>
+                    <div>
+                        <p><b>{task.name}</b> ({task.category})</p>
+                        <div className="task-info">
+                            <p onClick={cycleStatus} style={{backgroundColor: statusColors[task.status]}}>{statusLabels[task.status]}</p>
+                            <p><i>{task.due}</i></p>
+                        </div>
+                    </div>
+                    <div className="task-action-btns">
                         <button className="action-btn" onClick={() => setIsEditing(true)}>✎</button>
                         <button className="action-btn" onClick={() => deleteTodo(task.id)}>❌</button>
                     </div>
