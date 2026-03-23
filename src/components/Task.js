@@ -45,9 +45,11 @@ function Task( { task } ) {
             ) : (
                 <div className="task" style={{backgroundColor: bgColor}}>
                     <div>
-                        <p><b>{task.name}</b> ({task.category})</p>
+                        <p><b>{task.name}</b>
+                            {task.category === "unfiltered" ? "" : " (" + task.category + ")"}
+                        </p>
                         <div className="task-info">
-                            <p onClick={cycleStatus} style={{backgroundColor: statusColors[task.status]}}>{statusLabels[task.status]}</p>
+                            <p className="status-info" onClick={cycleStatus} style={{backgroundColor: statusColors[task.status]}}>{statusLabels[task.status]}</p>
                             <p><i>{task.due}</i></p>
                         </div>
                     </div>

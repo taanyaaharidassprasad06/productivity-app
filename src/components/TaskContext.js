@@ -21,8 +21,17 @@ export function TaskProvider( { children} ) {
         setTodos(newTodos);
     }
 
+    const editCategoryName = (oldName, newName) => {
+        setTodos(todos.map((todo) => {
+            if(todo.category === oldName) {
+                todo.category = newName;
+            }
+            return todo;
+        }));
+    } 
+
     return (
-        <TaskContext.Provider value={{ todos, add, edit, deleteTodo }}>
+        <TaskContext.Provider value={{ todos, add, edit, deleteTodo, editCategoryName }}>
             {children}
         </TaskContext.Provider>
     );

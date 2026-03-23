@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useCategories } from "./CategoryContext";
+import { useTasks } from "./TaskContext";
 
 function ListModal( { onClose } ) {
     const [name, setName] = useState("");
     const [color, setColor] = useState("#ffffff");
     const [editIndex, setEditIndex] = useState(null);
     const { categories, setCategories } = useCategories();
+    const { editCategoryName } = useTasks();
 
     const addCategory = () => {
         const newCategory = name.trim()
@@ -33,11 +35,14 @@ function ListModal( { onClose } ) {
     }
 
     const deleteCategory = (index) => {
+        const deletedName = categories[index].name
         const remainingCategories = [
             ...categories.slice(0, index),
             ...categories.slice(index + 1)
         ];
+
         setCategories(remainingCategories);
+        editCategoryName(deletedName, "unfiltered");
     }
 
     return (

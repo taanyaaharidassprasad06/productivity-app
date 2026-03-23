@@ -20,8 +20,11 @@ function TaskForm({ defaultCategory }) {
             category,
             status: "inactive"
         }
-
+        if(newTask.category === "") {
+            newTask.category = defaultCategory === "" ? "unfiltered" : defaultCategory;
+        }
         add(newTask);
+        
 
         setName("");
         setDate("");
