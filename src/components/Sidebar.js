@@ -18,9 +18,11 @@ function Sidebar({ setCategoryFilter }) {
             <div 
                 className="category-settings"
                 onClick={() => setCategoryFilter("")}
-            >
-            All
-            </div>
+            >All</div>
+            <div 
+                className="category-settings"
+                onClick={() => setCategoryFilter("unfiltered")}
+            >Unfiltered</div>
             {categories.map((category, index) => (
                 <div 
                     className="category-settings"

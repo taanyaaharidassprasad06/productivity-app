@@ -12,7 +12,11 @@ function TaskList({ categoryFilter }) {
     const [sortOrder, setSortOrder] = useState("");
 
     const filteredTodos = todos
-        .filter((todo) => !categoryFilter || categoryFilter === todo.category)
+        .filter((todo) => {
+            if(!categoryFilter) return true; 
+            if(categoryFilter === "unfiltered") return todo.category === "";
+            return categoryFilter === todo.category
+        })
         .filter((todo) => !statusFilter || statusFilter === todo.status)
         .sort((a, b) => {
             if(!sortOrder) return 0;
