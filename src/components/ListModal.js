@@ -69,7 +69,7 @@ function ListModal( { onClose } ) {
                 </div>
                 
                 {categories.map((category, index) => (
-                    <div className="category-edit">
+                    <div key={index} className="category-edit">
                         <div className="category-name">
                             <div className="circle" style={{backgroundColor: category.color}}></div>
                             <div key={index}>{category.name}</div>

@@ -23,10 +23,7 @@ export function TaskProvider( { children} ) {
 
     const editCategoryName = (oldName, newName) => {
         setTodos(todos.map((todo) => {
-            if(todo.category === oldName) {
-                todo.category = newName;
-            }
-            return todo;
+            return todo.category === oldName ? {...todo, category: newName} : todo;
         }));
     } 
 

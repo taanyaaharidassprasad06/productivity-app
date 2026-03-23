@@ -24,7 +24,7 @@ function Sidebar({ setCategoryFilter }) {
                 onClick={() => setCategoryFilter("unfiltered")}
             >Unfiltered</div>
             {categories.map((category, index) => (
-                <div 
+                <div key={index}
                     className="category-settings"
                     onClick={() => setCategoryFilter(category.name)}
                 >
