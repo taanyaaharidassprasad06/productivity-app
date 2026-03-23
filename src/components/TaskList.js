@@ -1,16 +1,13 @@
 import '../App.css';
 import { useTasks } from "./TaskContext";
-import { useCategories } from "./CategoryContext";
 import { useState } from "react";
 import Task from "./Task";
 import TaskForm from "./TaskForm";
 
-function TaskList() {
+function TaskList({ categoryFilter }) {
     // Get tasks and categories from context
     const { todos } = useTasks();
-    const { categories } = useCategories();
-
-    const [categoryFilter, setCategoryFilter] = useState("");
+    
     const [statusFilter, setStatusFilter] = useState("");
     const [sortOrder, setSortOrder] = useState("");
 
@@ -27,16 +24,9 @@ function TaskList() {
 
     return (
         <div className="task-list">
-            <TaskForm />
+            <TaskForm defaultCategory={categoryFilter}/>
 
             <div className="filter-by">
-                <select className="filter-by-val" value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
-                    <option value="">All</option>
-                    {categories.map((category, index) => (
-                        <option key={index} value={category.name}>{category.name}</option>
-                    ))}
-                </select>
-
                 <select className="filter-by-val" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
                     <option value="">All</option>
                     <option value="inactive">Not Started</option>

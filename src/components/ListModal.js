@@ -43,26 +43,42 @@ function ListModal( { onClose } ) {
     return (
         <div className="modal-overlay">
             <div className="list-modal">
-                <input 
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                />
-                <input className="color-selection"
-                    type="color"
-                    value={color}
-                    onChange={(e) => setColor(e.target.value)}
-                />
-                <button onClick={() => addCategory()}>+ List</button>
+                <div className="list-add">
+                    <input
+                        className="list-name"
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                    <div className="color-container">
+                        <label className="color-header" htmlFor="color-pick">Color:</label>
+                        <input 
+                            className="color-input"
+                            id="color-pick"
+                            type="color"
+                            value={color}
+                            onChange={(e) => setColor(e.target.value)}
+                        />
+                    </div>
+                    <button className="add-list-btn" onClick={() => addCategory()}>+</button>
+                </div>
+                
                 {categories.map((category, index) => (
-                    <div className="category-settings" style={{backgroundColor: category.color}}>
-                        <div key={index}>{category.name}</div>
-                        <button onClick={() => startEdit(index)}>✎</button>
-                        <button onClick={() => deleteCategory(index)}>❌</button>
+                    <div className="category-edit">
+                        <div className="category-name">
+                            <div className="circle" style={{backgroundColor: category.color}}></div>
+                            <div key={index}>{category.name}</div>
+                        </div>
+                        <div className="category-btn-container">
+                            <button className="category-btn" onClick={() => startEdit(index)}>✎</button>
+                            <button className="category-btn" onClick={() => deleteCategory(index)}>❌</button>
+                        </div>  
                     </div> 
                 ))}
-                {editIndex !== null && <button onClick={() => editCategory()}>Save</button>}
-                <button onClick={() => onClose()}>Close</button>
+                <div className="edit-btn-container">
+                    {editIndex !== null && <button className="edit-btn" onClick={() => editCategory()}>Save</button>}
+                    <button className="edit-btn" onClick={() => onClose()}>Close</button>
+                </div>  
             </div>
         </div>
         

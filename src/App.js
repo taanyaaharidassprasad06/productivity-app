@@ -7,16 +7,19 @@ import Sidebar from './components/Sidebar';
 
 function App() {
   const [sidebar, setSidebarOpen] = useState(false);
+  const [categoryFilter, setCategoryFilter] = useState("");
+
   return (
     <div className="base-container">
       <CategoryProvider>
         <TaskProvider>
           <div className="main-section">
             <div className="sidebar-settings">
-              <button className="sidebar-btn" onClick={() => setSidebarOpen(!sidebar)}>#</button>
-              {sidebar && <Sidebar/>}
+              <button 
+                className={`sidebar-btn ${sidebar ? "sidebar-close-btn" : "sidebar-open-btn"}`} onClick={() => setSidebarOpen(!sidebar)}>^</button>
+              {sidebar && <Sidebar setCategoryFilter={setCategoryFilter}/>}
             </div>
-            <TaskList />
+            <TaskList categoryFilter={categoryFilter}/>
           </div>
         </TaskProvider>
       </CategoryProvider>

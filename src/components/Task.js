@@ -7,9 +7,6 @@ import EditModal from './EditModal';
 function Task( { task } ) {
     const { edit, deleteTodo } = useTasks();
     const { categories } = useCategories();
-   /* const [name, setName] = useState(task.name);
-    const [date, setDate] = useState(task.due);
-    const [category, setCategory] = useState(task.category);*/
     const [isEditing, setIsEditing] = useState(false);
     const statusLabels = {
         inactive: "NOT STARTED",
@@ -44,7 +41,7 @@ function Task( { task } ) {
     return (
         <div>
             {isEditing ? (
-                <EditModal taskItem={task} onSave={handleSave}/>
+                <EditModal taskItem={task} onSave={handleSave} toggleEditView={setIsEditing}/>
             ) : (
                 <div className="task" style={{backgroundColor: bgColor}}>
                     <div>
